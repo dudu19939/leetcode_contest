@@ -1,0 +1,26 @@
+class Solution {
+    //实际上就是二分搜索
+    public int minEatingSpeed(int[] piles, int H) {
+        int low = 1;
+        int high = 1000000000;
+         int m =0;
+        while(low<=high){
+           m = (low + high)/2;
+            if(isOk(piles, m, H)){
+                high = m-1;
+            }
+            else
+                low = m+1;
+        }
+        return low;
+    }
+    private boolean isOk(int[] piles, int m,int H ){
+        int sum = 0;
+        for(int i=0;i<piles.length;i++){
+            sum += piles[i]/m;
+            if(piles[i] % m != 0)
+                sum++;
+        }
+        return sum<=H;
+    }
+}
